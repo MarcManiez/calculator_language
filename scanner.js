@@ -2,7 +2,7 @@ const tokens = require('./tokenTypes')
 const Token = require('./token')
 
 module.exports = class Scanner {
-  constructor(source = '1 + 3') {
+  constructor(source) {
     this.tokens = []
     this.source = source
     this.start = 0
@@ -18,7 +18,7 @@ module.exports = class Scanner {
           if (tokenType === 'SPACE') {
             // Don't generate tokens for empty space
           } else if (tokenType === 'NUMBER') {
-            const numberMatch = this.source.slice(this.start, this.current).match(regex)
+            const numberMatch = this.source.slice(this.start).match(regex)
             if (numberMatch) {
               const lexeme = numberMatch[0]
               this.tokens.push(new Token(tokenType, lexeme, parseFloat(lexeme)))
