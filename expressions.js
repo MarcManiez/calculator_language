@@ -44,7 +44,7 @@ class Unary {
   }
 
   eval() {
-    return parseFloat(this.operator.toString() + this.right.toString())
+    return parseFloat(this.operator.toString() + this.right.value.literal.toString())
   }
 }
 
