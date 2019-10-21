@@ -13,6 +13,7 @@ class Calculator {
     parser.parse()
     parser.print()
     console.log(parser.eval())
+    console.log(parser.byteCode())
   }
 }
 

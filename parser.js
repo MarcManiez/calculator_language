@@ -15,6 +15,7 @@ module.exports = class Parser {
     this.tokens = tokens
     this.current = 0
     this.ast = null
+    this.byteCodeInstructions = []
   }
 
   parse() {
@@ -28,6 +29,13 @@ module.exports = class Parser {
 
   eval() {
     return this.ast.eval()
+  }
+
+  byteCode() {
+    this.ast.byteCode(instruction => this.byteCodeInstructions.push(instruction))
+    const instructions = this.byteCodeInstructions.slice()
+    this.byteCodeInstructions = 0
+    return instructions
   }
 
   expression() {

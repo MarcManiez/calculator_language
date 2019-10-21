@@ -1,3 +1,5 @@
+const Token = require('./token')
+
 class BinaryExpression {
   constructor(left, operator, right) {
     this.left = left
@@ -26,6 +28,32 @@ class BinaryExpression {
     } else {
       throw new Error('No matching operator...')
     }
+  }
+
+  byteCode(callback) {
+    if (!(this.left instanceof Literal)) {
+      this.left.byteCode(callback)
+      const token = new Token('NUMBER', this.left.eval().toString(), this.left.eval())
+      this.left = new Literal(token)
+    }
+    if (!(this.right instanceof Literal)) {
+      this.right.byteCode(callback)
+      const token = new Token('NUMBER', this.right.eval().toString(), this.right.eval())
+      this.right = new Literal(token)
+    }
+    let operation
+    if (this.operator.type === 'STAR') {
+      operation = 'MULTIPLY'
+    } else if (this.operator.type === 'SLASH') {
+      operation = 'DIVIDE'
+    } else if (this.operator.type === 'PLUS') {
+      operation = 'ADD'
+    } else if (this.operator.type === 'MINUS') {
+      operation = 'SUBSTRACT'
+    } else {
+      throw new Error('No matching operator...')
+    }
+    callback({ operation, arguments: [this.left.value.literal, this.right.value.literal] })
   }
 }
 
