@@ -1,10 +1,11 @@
 module.exports = {
+  SPACE: /\s/,
   LEFT_PAREN: /\(/,
   RIGHT_PAREN: /\)/,
-  DOT: /./,
+  DOT: /\./,
   MINUS: /-/,
   PLUS: /\+/,
   SLASH: /\//,
   STAR: /\*/,
-  NUMBER: /^\d+.\d+/,
+  NUMBER: /^\d+(\.\d+)?/,
 }
