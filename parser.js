@@ -72,7 +72,7 @@ module.exports = class Parser {
       return new Literal(this.previous())
     } else if (this.match('LEFT_PAREN')) {
       const expr = this.expression()
-      if (this.peek() === 'RIGHT_PAREN') { this.advance() }
+      if (this.check('RIGHT_PAREN')) { this.advance() }
       return new Grouping(expr)
     } else {
       // return 'shit...'
