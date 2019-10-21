@@ -1,4 +1,5 @@
 const Scanner = require('./scanner')
+const Parser = require('./parser')
 
 class Calculator {
   constructor(program) {
@@ -7,7 +8,11 @@ class Calculator {
 
   execute() {
     const scanner = new Scanner(this.program)
-    console.log(scanner.scan())
+    const tokens = scanner.scan()
+    const parser = new Parser(tokens)
+    parser.parse()
+    parser.print()
+    console.log(parser.eval())
   }
 }
 

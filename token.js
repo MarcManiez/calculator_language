@@ -4,4 +4,8 @@ module.exports = class Token {
     this.lexeme = lexeme
     this.literal = literal
   }
+
+  toString() {
+    return this.literal ? this.literal.toString() : this.lexeme
+  }
 }
